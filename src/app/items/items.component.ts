@@ -125,9 +125,10 @@ export class ItemsComponent implements OnInit {
   sort(){
     this.itemsArray.sort(function(a, b){
       if(a.brand < b.brand) { return -1; }
-      if(a.brand > b.firstname) { return 1; }
+      if(a.brand > b.brand) { return 1; }
       return 0;
   })
+
     
   }
 
