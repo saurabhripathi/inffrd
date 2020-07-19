@@ -1,0 +1,97 @@
+<form [formGroup]="itemFg" >
+
+
+<div class='main-container' >
+    <div  id='search-product' >
+            <button (click)= "sort()">
+                    Sort By Alphabetically
+                </button>
+        <input  type="text"
+         formControlName = "searchProduct" placeholder="Search for products, brand and more" >
+        <button type = "button" 
+        (click)= "clickOnCart()">
+    
+                <i class="fa fa-shopping-cart" style="font-size: 12px" aria-hidden="true">
+                    
+                </i>
+                <div *ngIf ="cartArray.length>0" style="left: 50px;
+                position: absolute;
+                top: -8px;
+                font-size: 15px;
+                width: 15px;
+                background-color: #f16565;
+                border-radius: 25px;
+                color: white;
+
+                padding-bottom: 1px;"
+                >{{cartArray.length}}</div>
+        </button>
+
+    </div>
+    <div class = "product-grid">
+            <div id="product"
+            *ngFor = 'let x of itemsArray| items  : searchProduct;let i = index' >
+            
+                    <div id = 'product-container'>
+                        <div  style="text-align: center">
+                                <img src = './././assets/imeges/temp.jpg' width="70%" height="100%">
+                        </div>
+        
+                        <div id= 'brand' >
+                            <span >
+                                {{x.brand}}
+                            </span>
+
+                        </div>
+
+                        <div  id = 'price' >
+                                <span>
+                                   Rs. {{x.price}}
+                                </span>
+                        </div>
+        
+                        <div #ref class = "add-bag">
+        
+                      
+                            <button (click)= "click(x,i)" *ngIf = "!x.isAdded"
+                            type="button">
+                                ADD TO BAG
+                            </button>
+                    
+                            <button (click)= "clickOnCart()" *ngIf = "x.isAdded"
+                            type="button">
+                                GO TO BAG
+                            </button>
+                    
+                  
+                         
+        
+        
+                       
+                        </div>
+
+                        <div *ngIf = "x.outOfStock">
+                            <p   [ngClass] = "{'red':x.outOfStock}">
+                            Only {{x.quantity}} quantity are left.
+                            </p>
+                        </div>
+                       
+                    </div>
+            </div>
+
+    </div>
+    
+     
+</div>
+</form>
+
+
+
+
+<!-- 
+<div style="display: flex;flex-direction: column">
+        <div  style=" background-image: url('./././assets/imeges/temp.jpg');">
+       
+        </div>
+
+    </div> -->

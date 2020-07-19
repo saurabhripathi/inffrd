@@ -1,0 +1,79 @@
+<div class="container" *ngIf = 'cartListArray?.length>0'>
+  <div id= 'header' >
+    <span>
+      My Shopping Bag ({{ items }} Items)
+    </span>
+
+    <span> Total: Rs {{ totalAmount | number }} </span>
+  </div>
+
+  <diV  style="width: 80%">
+    <ul style="list-style: none" *ngFor="let x of cartListArray; let i = index">
+      <li>
+        <div id='body'>
+          <div id='img' >
+            <img
+              src="./././assets/imeges/temp.jpg"
+              width="100%"
+              height="100%"
+            />
+          </div>
+
+          <div  id = "description">
+            <div
+              style="display: flex;
+                            flex-direction: column;
+                            padding-left: 10%;"
+            >
+              <p >
+                {{ x.brand }}
+              </p>
+              <p
+              >
+                {{ x.color | uppercase }}
+              </p>
+              <div>
+                <label
+                >
+                  Quantity
+                </label>
+                <input style="width: 25%"
+                  type="text"
+                  (change)="change($event,x.id,i)"
+                  [value]="x.addQuantity"
+                />
+                <p id = 'feedback' *ngIf = 'x.outOfStock'>
+                  Can not add more then {{x.quantity}} quantity.
+
+                </p>
+               
+              </div>
+             
+              <button (click) = "removeClicked(x.id)">
+                REMOVE
+              </button>
+            
+            </div>
+          </div>
+
+          <div style="margin-top: 67px;width: 25%;font-weight:700 ">
+             Rs {{x.price| number}}
+          </div>
+        </div>
+      </li>
+    </ul>
+  </diV>
+</div>
+
+<div style="justify-content: center;
+width: 100%;
+height: 100vh;
+display: flex;
+align-items: center;"   *ngIf = 'cartListArray?.length===0'>
+  <div style="color: #ff3f6c;font-weight: 700"> 
+      There is nothing in your bag. Let's add some items.
+  </div>
+  
+
+</div>
+
